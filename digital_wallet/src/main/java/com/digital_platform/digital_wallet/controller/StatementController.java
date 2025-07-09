@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @RequiredArgsConstructor
 @SessionAttributes("userId")
 public class StatementController {
-    private final StatementService statementService;
+    private StatementService statementService;
 
     @GetMapping("/statement")
     public String statement(@ModelAttribute("userId") Long userId,

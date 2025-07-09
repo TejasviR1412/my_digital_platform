@@ -13,8 +13,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class StatementService {
-    private final TransactionRepository transactionRepository;
-    private final UserRepository userRepository;
+    private TransactionRepository transactionRepository;
+    private UserRepository userRepository;
 
     @Value("${wallet.maxTransactions:20}")
     private int maxTransactions;

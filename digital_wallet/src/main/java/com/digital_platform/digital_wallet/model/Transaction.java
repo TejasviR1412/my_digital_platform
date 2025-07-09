@@ -28,4 +28,11 @@ public class Transaction {
 
     @ManyToOne
     private User user;
+
+    public Transaction(LocalDateTime date, BigDecimal amount, TransactionType type, User user) {
+        this.date = date;
+        this.amount = amount;
+        this.type = type;
+        this.user = user;
+    }
 }

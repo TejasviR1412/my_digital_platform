@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 public class WalletService {
-    private final UserRepository userRepository;
-    private final TransactionRepository transactionRepository;
+    private UserRepository userRepository;
+    private TransactionRepository transactionRepository;
 
     @Value("${wallet.maxDepositPerDay}")
     private BigDecimal maxDepositPerDay;
@@ -72,7 +72,7 @@ public class WalletService {
     }
 
     private void saveTransaction(User user , TransactionType type , BigDecimal amount){
-        transactionRepository.save(new Transaction(null, LocalDateTime.now(),amount,type,user));
+        transactionRepository.save(new Transaction(LocalDateTime.now(),amount,type,user));
     }
 
 }

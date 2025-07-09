@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @SessionAttributes("userId")
 public class AuthController {
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
     @GetMapping("/signup")
     public String showSignupForm(Model model){
