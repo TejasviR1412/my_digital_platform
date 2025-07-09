@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exchange Rates</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+    }
+    .rates-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .rate-row {
+        transition: all 0.3s ease;
+        border-radius: 10px;
+    }
+    .rate-row:hover {
+        background-color: rgba(102, 126, 234, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    .currency-flag {
+        width: 30px;
+        height: 20px;
+        border-radius: 3px;
+        margin-right: 10px;
+    }
+    .rate-value {
+        font-weight: 600;
+        color: #28a745;
+        font-size: 1.1em;
+    }
+    .currency-code {
+        font-weight: 600;
+        color: #495057;
+    }
+    .btn-converter {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 50px;
+        padding: 10px 25px;
+        font-weight: 600;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    .btn-converter:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        color: white;
+    }
+    .last-updated {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body class="gradient-bg">
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="rates-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h1 class="display-6 fw-bold text-primary mb-2">
+              <span th:if="${baseCurrency}" th:text="${baseCurrency} + ' Exchange Rates'">Exchange Rates</span>
+              <span th:unless="${baseCurrency}">All Exchange Rates</span>
+            </h1>
+            <p class="text-muted mb-0">Real-time currency exchange rates</p>
+          </div>
+          <a th:href="@{/currency/converter}" class="btn btn-converter">
+            💱 Currency Converter
+          </a>
+        </div>
+
+        <div class="last-updated text-center mb-4">
+          <small class="text-muted">
+            <i class="fas fa-clock me-2"></i>
+            Rates updated daily at midnight
+          </small>
+        </div>
+
+        <div th:if="${#lists.isEmpty(exchangeRates)}" class="text-center py-5">
+          <div class="text-muted">
+            <i class="fas fa-info-circle fa-3x mb-3"></i>
+            <h4>No exchange rates available</h4>
+            <p>Exchange rates will be populated automatically during the next scheduled update.</p>
+          </div>
+        </div>
+
+        <div th:unless="${#lists.isEmpty(exchangeRates)}" class="row">
+          <div class="col-12">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="table-light">
+                <tr>
+                  <th scope="col" class="fw-semibold">Currency Pair</th>
+                  <th scope="col" class="fw-semibold">From</th>
+                  <th scope="col" class="fw-semibold">To</th>
+                  <th scope="col" class="fw-semibold text-end">Exchange Rate</th>
+                  <th scope="col" class="fw-semibold text-center">Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="rate : ${exchangeRates}" class="rate-row">
+                  <td class="align-middle">
+                    <span class="currency-code" th:text="${rate.currencyPair}">USD_EUR</span>
+                  </td>
+                  <td class="align-middle">
+                    <span class="currency-code" th:text="${rate.fromCurrency}">USD</span>
+                  </td>
+                  <td class="align-middle">
+                    <span class="currency-code" th:text="${rate.toCurrency}">EUR</span>
+                  </td>
+                  <td class="align-middle text-end">
+                    <span class="rate-value" th:text="${#numbers.formatDecimal(rate.rate, 1, 4)}">0.8500</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="badge bg-secondary" th:text="${rate.localDateTime}">2024-01-15</span>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div th:unless="${#lists.isEmpty(exchangeRates)}" class="mt-4">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card bg-light">
+                <div class="card-body text-center">
+                  <h5 class="card-title text-primary">Total Currency Pairs</h5>
+                  <h3 class="text-dark" th:text="${#lists.size(exchangeRates)}">0</h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card bg-light">
+                <div class="card-body text-center">
+                  <h5 class="card-title text-primary">Last Updated</h5>
+                  <h6 class="text-dark" th:text="${exchangeRates[0]?.localDateTime}">Today</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

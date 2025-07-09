@@ -1,0 +1,8 @@
+/Users/tejasvirozukurthi/Desktop/Learning/projects/currency_converter/src/main/java/com/projects/currency_converter/CurrencyConverterApplication.java
+/Users/tejasvirozukurthi/Desktop/Learning/projects/currency_converter/src/main/java/com/projects/currency_converter/configuration/ExchangeApiProperties.java
+/Users/tejasvirozukurthi/Desktop/Learning/projects/currency_converter/src/main/java/com/projects/currency_converter/controller/CurrencyController.java
+/Users/tejasvirozukurthi/Desktop/Learning/projects/currency_converter/src/main/java/com/projects/currency_converter/model/ExchangeRate.java
+/Users/tejasvirozukurthi/Desktop/Learning/projects/currency_converter/src/main/java/com/projects/currency_converter/repository/ExchangeRateRepository.java
+/Users/tejasvirozukurthi/Desktop/Learning/projects/currency_converter/src/main/java/com/projects/currency_converter/scheduler/RateUpdateScheduler.java
+/Users/tejasvirozukurthi/Desktop/Learning/projects/currency_converter/src/main/java/com/projects/currency_converter/service/CurrencyService.java
+/Users/tejasvirozukurthi/Desktop/Learning/projects/currency_converter/src/main/java/com/projects/currency_converter/service/ExchangeRateUpdaterService.java
