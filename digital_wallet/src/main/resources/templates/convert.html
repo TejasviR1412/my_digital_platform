@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Currency Converter - My Digital Wallet</title>
+</head>
+<body>
+  <h2>Currency Converter</h2>
+
+  <form th:action="@{/convert}" method="post">
+      <div>
+          <label>From Currency:</label>
+          <input type="text" name="from" th:value="${from}" required>
+      </div>
+
+      <div>
+          <label>To Currency:</label>
+          <input type="text" name="to" th:value="${to}" required>
+      </div>
+
+      <div>
+          <label>Amount:</label>
+          <input type="number" name="amount" th:value="${originalAmount}" step="0.01" min="0" required>
+      </div>
+
+      <div>
+          <button type="submit">Convert</button>
+      </div>
+  </form>
+
+  <div th:if="${convertedAmount}">
+      <h4>Conversion Result:</h4>
+      <p>
+          <span th:text="${originalAmount}"></span>
+          <span th:text="${from}"></span> =
+          <strong><span th:text="${convertedAmount}"></span></strong>
+          <span th:text="${to}"></span>
+      </p>
+  </div>
+
+  <div th:text="${error}" style="color:red;">
+      <p th:text="${error}"></p>
+  </div>
+
+  <nav>
+      <a th:href="@{/balance}">Back to Balance</a>
+  </nav>
+</body>
+</html>

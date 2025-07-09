@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Balance - My Digital Wallet</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+  <h2>Welcome, <span th:text="${username}">User</span></h2>
+  <h3>Current Balance: Rs.<span th:text="${balance}">0.00</span></h3>
+
+  <div>
+    <h4>Deposit Amount</h4>
+    <form th:action="@{/deposit}" method="post">
+      <input type="number" name="amount" min="100" step="100" required/>
+      <br>
+      <button type="submit">Deposit</button>
+    </form>
+  </div>
+
+<div>
+  <h4>Withdraw Amount</h4>
+  <form th:action="@{/withdraw}" method="post">
+    <input type="number" name="amount" min="100" step="100" required>
+    <br>
+    <button type="submit">Withdraw</button>
+  </form>
+</div>
+
+  <p th:if="${error}" th:text="${error}" style="color:red"></p>
+  <p th:if="${message}" th:text="${message}" style="color:green"></p>
+
+<nav>
+  <a th:href="@{/statement}">Mini Statement</a>
+  <a th:href="@{/convert}">Currency Converter</a>
+  <a th:href="@{/logout}">Logout</a>
+</nav>
+</body>
+</html>

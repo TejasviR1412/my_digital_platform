@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Statement - My Digital Wallet</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+  <h2>Mini Statement</h2>
+
+  <table border="10">
+    <tr>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Amount</th>
+    </tr>
+
+    <tr th:each="txn: ${transactions}">
+      <td th:text="${#dates.format(txn.date,'dd-MM-yyyy HH:mm'}"></td>
+      <td th:text="${txn.type}"></td>
+      <td th:text="${txn.amount}"></td>
+    </tr>
+  </table>
+
+  <nav>
+    <a th:href="@/balance">Back to Balance</a>
+  </nav>
+</body>
+</html>
