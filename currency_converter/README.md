@@ -88,10 +88,10 @@ bash:
 ### ▶️ Run locally
 mvn spring-boot:run
 
-🌐 UI: http://localhost:8080/currency/converter  
-📊 Exchange rates: http://localhost:8080/currency/rates  
-🧰 Swagger UI: http://localhost:8080/swagger-ui.html  
-   OpenAPI JSON: http://localhost:8080/api-docs  
+🌐 UI: http://localhost:8081/currency/converter  
+📊 Exchange rates: http://localhost:8081/currency/rates  
+🧰 Swagger UI: http://localhost:8081/swagger-ui.html  
+   OpenAPI JSON: http://localhost:8081/api-docs  
 🛠 REST API: POST /api/currency/convert?from=USD&to=EUR&amount=100  
 
 ---
