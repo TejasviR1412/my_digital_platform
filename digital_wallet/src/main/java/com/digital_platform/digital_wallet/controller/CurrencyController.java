@@ -1,5 +1,6 @@
 package com.digital_platform.digital_wallet.controller;
 
+import com.digital_platform.digital_wallet.dto.ConversionResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -32,15 +33,23 @@ public class CurrencyController {
                           Model model){
         try {
             String url = String.format("%s?from=%s&to=%s&amount=%s",converterUrl,from,to,amount);
-            BigDecimal converetedAmount = restTemplate.getForObject(url, BigDecimal.class);
-            model.addAttribute("originalAmount" , amount);
+
+            ConversionResponse conversionResponse = restTemplate.getForObject(url,ConversionResponse.class);
+
+            if(conversionResponse != null && conversionResponse.getConvertedAmount() != null){
+                BigDecimal convertedAmount = conversionResponse.getConvertedAmount();
+                model.addAttribute("convertedAmount" , convertedAmount);
+            }else{
+                model.addAttribute("error","Conversion API returned empty response");
+            }
+
+            model.addAttribute("originalAmount",amount);
             model.addAttribute("from",from);
             model.addAttribute("to",to);
-            model.addAttribute("converetedAmount",converetedAmount);
         }catch (Exception e){
             model.addAttribute("error","Failed to convert:" + e.getMessage());
         }
 
-        return "converter";
+        return "convert";
     }
 }

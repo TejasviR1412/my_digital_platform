@@ -1,7 +1,6 @@
 package com.digital_platform.digital_wallet.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.math.BigDecimal;
 

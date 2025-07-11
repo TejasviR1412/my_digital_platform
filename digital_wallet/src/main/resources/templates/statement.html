@@ -16,14 +16,14 @@
     </tr>
 
     <tr th:each="txn: ${transactions}">
-      <td th:text="${#dates.format(txn.date,'dd-MM-yyyy HH:mm'}"></td>
+      <td th:text="${#temporals.format(txn.date,'dd-MM-yyyy HH:mm')}"></td>
       <td th:text="${txn.type}"></td>
       <td th:text="${txn.amount}"></td>
     </tr>
   </table>
 
   <nav>
-    <a th:href="@/balance">Back to Balance</a>
+    <a th:href="@{/balance}">Back to Balance</a>
   </nav>
 </body>
 </html>

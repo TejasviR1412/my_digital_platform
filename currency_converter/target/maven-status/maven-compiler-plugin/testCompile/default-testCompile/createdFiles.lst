@@ -1,1 +1,7 @@
+com/projects/currency_converter/controller/CurrencyApiContollerTest.class
+com/projects/currency_converter/controller/CurrencyApiContollerTest$TestConfig.class
 com/projects/currency_converter/CurrencyConverterApplicationTests.class
+com/projects/currency_converter/controller/CurrencyControllerTest$TestConfig.class
+com/projects/currency_converter/controller/CurrencyControllerTest.class
+com/projects/currency_converter/service/ExchangeRateUpdaterServiceTest.class
+com/projects/currency_converter/service/CurrencyServiceTest.class

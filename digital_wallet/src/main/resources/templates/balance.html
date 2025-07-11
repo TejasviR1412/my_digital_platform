@@ -12,7 +12,7 @@
   <div>
     <h4>Deposit Amount</h4>
     <form th:action="@{/deposit}" method="post">
-      <input type="number" name="amount" min="100" step="100" required/>
+      <input type="number" name="amount" required/>
       <br>
       <button type="submit">Deposit</button>
     </form>
@@ -21,7 +21,7 @@
 <div>
   <h4>Withdraw Amount</h4>
   <form th:action="@{/withdraw}" method="post">
-    <input type="number" name="amount" min="100" step="100" required>
+    <input type="number" name="amount" required>
     <br>
     <button type="submit">Withdraw</button>
   </form>
@@ -31,9 +31,17 @@
   <p th:if="${message}" th:text="${message}" style="color:green"></p>
 
 <nav>
-  <a th:href="@{/statement}">Mini Statement</a>
-  <a th:href="@{/convert}">Currency Converter</a>
-  <a th:href="@{/logout}">Logout</a>
+  <form th:action="@{/statement}" method="get" style="display:inline;">
+    <button type="submit">Mini Statement</button>
+  </form>
+
+  <form th:action="@{/convert}" method="get" style="display:inline;">
+    <button type="submit">Currency Converter</button>
+  </form>
+
+  <form th:action="@{/logout}" method="post" style="display:inline;">
+    <button type="submit">Logout</button>
+  </form>
 </nav>
 </body>
 </html>

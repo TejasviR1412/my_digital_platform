@@ -1,5 +1,9 @@
 package com.digital_platform.digital_wallet.controller;
 
+import com.digital_platform.digital_wallet.exception.DepositLimitExceededException;
+import com.digital_platform.digital_wallet.exception.MinDepositAndWithDrawalException;
+import com.digital_platform.digital_wallet.exception.WithdrawalLimitExceededException;
+import com.digital_platform.digital_wallet.exception.ZeroBalanceException;
 import com.digital_platform.digital_wallet.service.WalletService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +24,14 @@ public class WalletController {
     public String deposit(@RequestParam BigDecimal amount,
                           @ModelAttribute("userId") Long userId,
                           Model model){
-        BigDecimal newBalance = walletService.deposit(userId,amount);
-        model.addAttribute("balance",newBalance);
+        try{
+            BigDecimal newBalance = walletService.deposit(userId,amount);
+            model.addAttribute("balance",newBalance);
+        }catch (DepositLimitExceededException | MinDepositAndWithDrawalException e){
+            model.addAttribute("balance",walletService.getBalance(userId));
+            model.addAttribute("error",e.getMessage());
+        }
+
         return "balance";
     }
 
@@ -29,8 +39,14 @@ public class WalletController {
     public String withdraw(@RequestParam BigDecimal amount,
                            @ModelAttribute("userId") Long userId,
                            Model model){
-        BigDecimal newBalance = walletService.withdraw(userId, amount);
-        model.addAttribute("balance",newBalance);
+        try{
+            BigDecimal newBalance = walletService.withdraw(userId, amount);
+            model.addAttribute("balance",newBalance);
+        }catch (WithdrawalLimitExceededException | ZeroBalanceException | MinDepositAndWithDrawalException e){
+            model.addAttribute("balance",walletService.getBalance(userId));
+            model.addAttribute("error",e.getMessage());
+        }
+
         return "balance";
     }
 

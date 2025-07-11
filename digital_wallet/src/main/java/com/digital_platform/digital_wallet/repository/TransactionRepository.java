@@ -11,9 +11,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface TransactionRepository extends JpaRepository<Transaction,Long> {
-    List<Transaction> findTo20ByUserOrderByDateDesc(User user);
+    List<Transaction> findTop20ByUserOrderByDateDesc(User user);
 
     //Sum of deposits for DEPOSIT for a user on a given date
     @Query("SELECT COALESCE(SUM(t.amount),0) FROM Transaction t WHERE t.user.id=:userId AND t.type='DEPOSIT' AND FUNCTION('DATE',t.date) = :date")
     BigDecimal sumDepositsByUserAndDate(@Param("userId") Long userId, @Param("date")LocalDate date);
+
+    //Sum of withdrawals for WITHDRAW for a user on a given date
+    @Query("SELECT COALESCE(SUM(t.amount),0) FROM Transaction t WHERE t.user.id=:userId AND t.type='WITHDRAW' AND FUNCTION('DATE',t.date) = :date")
+    BigDecimal sumWithdrawalsByUserAndDate(@Param("userId") Long userId, @Param("date")LocalDate date);
 }

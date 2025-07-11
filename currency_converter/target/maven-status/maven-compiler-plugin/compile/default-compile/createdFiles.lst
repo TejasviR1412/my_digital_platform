@@ -1,8 +1,11 @@
 com/projects/currency_converter/model/ExchangeRate.class
 com/projects/currency_converter/service/ExchangeRateUpdaterService.class
-com/projects/currency_converter/CurrencyConverterApplication.class
-com/projects/currency_converter/service/CurrencyService.class
 com/projects/currency_converter/configuration/ExchangeApiProperties.class
 com/projects/currency_converter/scheduler/RateUpdateScheduler.class
 com/projects/currency_converter/repository/ExchangeRateRepository.class
 com/projects/currency_converter/controller/CurrencyController.class
+com/projects/currency_converter/model/CurrencyConversionRequest.class
+com/projects/currency_converter/CurrencyConverterApplication.class
+com/projects/currency_converter/service/CurrencyService.class
+com/projects/currency_converter/configuration/SwaggerConfiguration.class
+com/projects/currency_converter/controller/CurrencyApiContoller.class

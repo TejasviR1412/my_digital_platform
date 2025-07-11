@@ -3,11 +3,13 @@ package com.digital_platform.digital_wallet.service;
 import com.digital_platform.digital_wallet.model.User;
 import com.digital_platform.digital_wallet.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
+    @Autowired
     private UserRepository userRepository;
 
     public User signup(String username,

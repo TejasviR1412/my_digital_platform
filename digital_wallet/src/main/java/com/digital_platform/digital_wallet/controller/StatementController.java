@@ -2,6 +2,7 @@ package com.digital_platform.digital_wallet.controller;
 
 import com.digital_platform.digital_wallet.service.StatementService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @RequiredArgsConstructor
 @SessionAttributes("userId")
 public class StatementController {
+    @Autowired
     private StatementService statementService;
 
     @GetMapping("/statement")

@@ -26,7 +26,8 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     private TransactionType type;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Transaction(LocalDateTime date, BigDecimal amount, TransactionType type, User user) {
